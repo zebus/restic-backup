@@ -9,6 +9,8 @@ This script is designed to back up **self-hosted services**, including **system 
 - **Supports any restic repository**: Works with S3-compatible storage, local storage, Backblaze B2, Rclone, and more.
 - **Optional status push**: Integrates with monitoring tools (e.g., Uptime Kuma) to report success or failure of backups.
 
+**Note:** This project is not affiliated with the official [restic](https://restic.net/) project. It’s a custom backup solution built using `restic`.
+
 ## Requirements
 
 Make sure the following software is installed:
@@ -118,7 +120,7 @@ Once you’ve configured the `.env`, `config.yaml`, and `excludes.txt` files, yo
 To run the script manually:
 
 ```bash
-./backup.sh
+./restic-backup.sh
 ```
 
 To automate the backup process, you can add it to your crontab:
@@ -130,10 +132,10 @@ crontab -e
 Here’s an example of how to set it up to run every day at midnight:
 
 ```bash
-0 0 * * * /path/to/backup.sh
+0 0 * * * /path/to/restic-backup.sh
 ```
 
-Make sure to replace `/path/to/backup.sh` with the actual path to the script.
+Make sure to replace `/path/to/restic-backup.sh` with the actual path to the script.
 
 ## Notes
 
