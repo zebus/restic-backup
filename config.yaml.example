@@ -1,0 +1,62 @@
+# Define the base path for all services. This can be used to reference service directories.
+# The script assumes that paths under each service are located inside a folder named after the service inside this base directory.
+base_path: "/opt"
+
+# System files to back up (these don't have associated databases)
+system_files:
+  paths:
+    - /etc/crontab
+    - /etc/ssh/sshd_config
+    - /etc/fstab
+    - /etc/hosts
+    - /etc/hostname
+    - /etc/logrotate.d
+    - /home/user/scripts
+    - /home/user/.bashrc
+    - /home/user/.profile
+    - /home/user/.ssh
+
+# Services configurations
+# Each service is assumed to have its own directory inside the base_path. 
+# For example, the "vaultwarden" service would have its files located inside /opt/vaultwarden/.
+services:
+  # Nginx (no database)
+  nginx:
+    # The paths are relative to /opt/nginx/ (since nginx is the service name and base_path is /opt)
+    paths:
+      - nginx.conf
+      - sites-available
+      - sites-enabled
+
+  # Vaultwarden (SQLite database)
+  vaultwarden:
+    db_type: "sqlite"
+    db_names: 
+      - data/db.sqlite3
+    paths:
+      - data/attachments
+      - data/config.json
+
+  # Nextcloud (MariaDB database)
+  nextcloud:
+    db_type: "mariadb"
+    container: "nextcloud_db"
+    db_name: "nextcloud"
+    db_user: "nextcloud_user"
+    db_password: "your_db_password"
+    # Paths are relative to /opt/nextcloud/
+    paths:
+      - config/config.php
+      - data
+
+  # GitLab (PostgreSQL database)
+  gitlab:
+    db_type: "postgres"
+    container: "gitlab_postgres"
+    db_name: "gitlabhq_production"
+    db_user: "gitlab_user"
+    db_password: "your_db_password"
+    # Paths are relative to /opt/gitlab/
+    paths:
+      - config/gitlab.rb
+      - data

@@ -1,0 +1,20 @@
+# Ignore .env files, but not the example version
+*.env
+!*.env.example
+
+# Ignore .yaml files, but not the example version
+*.yaml
+!*.yaml.example
+
+# Ignore .txt files, but not the example version
+*.txt
+!*.txt.example
+
+# Ignore any temporary files
+*.tmp
+
+# Ignore the prune timestamp file used to track the last prune date
+.last_prune
+
+# Ignore logs but include the folder
+logs/*

@@ -1,0 +1,38 @@
+# Available Variables:
+# $DIR       : Refers to the script's directory. Useful for excluding log files or temporary files located in the script's folder.
+# $BASE_PATH : Refers to the base directory for your services as defined in the YAML configuration. This can be used to exclude paths within each service's directory.
+# Common system environment variables like $HOME are also available for use, making it easy to exclude files in user-specific directories.
+
+# Example Exclusions for SQLite, SQLite3, and other .db-related files
+# These files are often excluded since database backups are handled separately.
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+*.db-shm
+*.db-wal
+
+# Exclude backup log as it's actively being written to
+# This prevents the backup log from being included in the backup, which could cause issues.
+$DIR/logs/backup.log
+
+# Example: Exclude Plex Cache Directory
+# Plex Media Server instructions recommend excluding the Cache directory to save space and avoid backing up frequently-changing cache data.
+# You can comment out or replace this with other cache directories.
+# $BASE_PATH/plex/Library/Application Support/Plex Media Server/Cache
+
+# Example: Exclude Plex database directory (if you're dumping databases separately)
+# If you're handling backups of the Plex database in a different way (e.g., via a dump), you can exclude this directory.
+# $BASE_PATH/plex/Library/Application Support/Plex Media Server/Plug-in Support/Databases
+
+# Example: Exclude files in your home directory using the system environment variable $HOME
+# This is useful for excluding common user-specific paths, such as downloads or cache directories.
+# $HOME/Downloads
+# $HOME/.cache
+
+# Add additional exclusions below, depending on your application or service-specific needs.
+# For example:
+# Exclude a service's temporary files
+# $BASE_PATH/my_service/tmp
+# Exclude logs from another service
+# $BASE_PATH/my_service/logs
